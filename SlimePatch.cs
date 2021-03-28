@@ -16,7 +16,7 @@ namespace ColorfulGel
             On.Terraria.NPC.NPCLoot -= NPC_NPCLoot;
         }
 
-        static Dictionary<int, string> PredefinedSlimeColors = new Dictionary<int, string>
+        internal static Dictionary<int, string> PredefinedSlimeColors = new Dictionary<int, string>
         {
             {-5, "Grey"}, {-6, "Grey"}, {16, "Grey" }, {302, "Grey" },
             {81, "Corrupt"}, {-1, "Corrupt"},{-2, "Corrupt"},
@@ -59,7 +59,6 @@ namespace ColorfulGel
                         item = Main.item[Item.NewItem(npc.position, ItemID.Gel)];
                     }
                     else item = SearchNewestItem(ItemID.Gel);
-                    item.SetNameOverride(Lang.GetItemNameValue(ItemID.Gel) + " (" + kvp.Value + ")");
                     item.color = ColorfulGel.GelColors[kvp.Value];
                 }
             }

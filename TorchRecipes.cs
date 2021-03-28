@@ -7,7 +7,7 @@ namespace ColorfulGel
 {
     static class TorchRecipes
     {
-        static List<Tuple<string, short, int>> GelMakeTorchesCount = new List<Tuple<string, short, int>>
+        static internal List<Tuple<string, short, int>> GelMakeTorchesCount = new List<Tuple<string, short, int>>
         {
             new Tuple<string, short, int>( "Default",    ItemID.Torch, 1 ),
             new Tuple<string, short, int>( "Red",        ItemID.Torch, 2 ),
@@ -34,7 +34,7 @@ namespace ColorfulGel
             
             new RecipeEditor(rf.SearchRecipes()[0]).DeleteRecipe();
 
-            GelModRecipe r = new GelModRecipe(mod);
+            ModRecipe r = new ModRecipe(mod);
 
             foreach (Tuple<string, short, int> rc in GelMakeTorchesCount)
             {
@@ -42,7 +42,7 @@ namespace ColorfulGel
                 r.AddRecipeGroup(RecipeGroupID.Wood);
                 r.SetResult(rc.Item2, rc.Item3);
                 r.AddRecipe();
-                r = new GelModRecipe(mod);
+                r = new ModRecipe(mod);
             }
         }
     }

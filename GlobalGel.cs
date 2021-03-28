@@ -22,7 +22,6 @@ namespace ColorfulGel
         public override void Load(Item item, TagCompound tag)
         {
             item.color.PackedValue = tag.Get<uint>("color");
-            ColorfulGel.SetGelItemColorName(item);
         }
 
         public override bool NeedsSaving(Item item)

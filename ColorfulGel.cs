@@ -9,14 +9,14 @@ namespace ColorfulGel
 	public class ColorfulGel : Mod
 	{
         public static Dictionary<string, Color> GelColors = new Dictionary<string, Color>()
-        {            
+        {
             { "Red",        new Color(255, 30,  0,   100)},
             { "Blue",       new Color(0,   80,  255, 100)},
             { "Green",      new Color(0,   220, 40,  100)},
             { "Yellow",     new Color(255, 255, 0,   100)},
             { "Purple",     new Color(200, 0,   255, 150)},
             { "Jungle",     new Color(143, 215, 93,  100)},
-                                           
+
             { "Lava",       new Color(247, 127, 62,  150)},
             { "Grey",       new Color(80,  80,  80,  150)},
             { "Corrupt",    new Color(131, 73,  245, 150)},
@@ -28,6 +28,13 @@ namespace ColorfulGel
 
             { "Default" , default }
         };
+
+        public void AddGelColor(string name, Color color, int slimeDropNetID = int.MinValue, short makesTorchType = short.MinValue, int makesTorchCount = 1) 
+        {
+            GelColors.Add(name, color);
+            if (makesTorchType != short.MinValue) TorchRecipes.GelMakeTorchesCount.Add(new System.Tuple<string, short, int>(name, makesTorchType, makesTorchCount));
+            if (slimeDropNetID != int.MinValue) SlimePatch.PredefinedSlimeColors.Add(slimeDropNetID, name);
+        }
 
         public override void Load()
         {
@@ -46,21 +53,29 @@ namespace ColorfulGel
             base.AddRecipes();
 
             TorchRecipes.AddRecipes(this);
+            
         }
-
-        public static void SetGelItemColorName(Item item) 
+        public static bool TryGetGelItemColorName(Item item, out string color) 
         {
-            if (item.type != ItemID.Gel) return;
-            string gelcolor = null;
+            color = null;
+            if (item.type != ItemID.Gel) return false;
             foreach (KeyValuePair<string, Color> kvp in ColorfulGel.GelColors)
             {
                 if (item.color == kvp.Value)
                 {
-                    gelcolor = kvp.Key;
-                    break;
+                    color = kvp.Key;
+                    return true;
                 }
             }
-            if (gelcolor != null) item.SetNameOverride(Lang.GetItemNameValue(ItemID.Gel) + " (" + gelcolor + ")");
+            return false;
+        }
+        public static Item GetGelItem(string color, int stack) 
+        {
+            Item item = new Item();
+            item.SetDefaults(ItemID.Gel);
+            item.color = GelColors[color];
+            item.stack = stack;
+            return item;
         }
 
 }
