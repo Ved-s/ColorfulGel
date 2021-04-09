@@ -41,12 +41,14 @@ namespace ColorfulGel
             base.Load();
             ItemPatch.ApplyPatch();
             SlimePatch.ApplyPatch();
+            ItemSortingPatch.ApplyPatch();
         }
         public override void Unload()
         {
             base.Unload();
             ItemPatch.RemovePatch();
             SlimePatch.RemovePatch();
+            ItemSortingPatch.RemovePatch();
         }
         public override void AddRecipes()
         {
