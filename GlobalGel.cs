@@ -20,12 +20,10 @@ namespace ColorfulGel
             tc.Add("color", item.color.PackedValue);
             return tc;
         }
-
         public override void Load(Item item, TagCompound tag)
         {
             item.color.PackedValue = tag.Get<uint>("color");
         }
-
         public override bool NeedsSaving(Item item)
         {
             return item.type == Terraria.ID.ItemID.Gel;

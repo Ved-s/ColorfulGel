@@ -71,7 +71,7 @@ namespace ColorfulGel
             }
             return false;
         }
-        public static Item GetGelItem(string color, int stack) 
+        public static Item GetGelItem(string color, int stack = 1) 
         {
             Item item = new Item();
             item.SetDefaults(ItemID.Gel);
@@ -79,7 +79,6 @@ namespace ColorfulGel
             item.stack = stack;
             return item;
         }
-
 }
 
 }
