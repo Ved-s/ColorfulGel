@@ -42,6 +42,7 @@ namespace ColorfulGel
             ItemPatch.ApplyPatch();
             SlimePatch.ApplyPatch();
             ItemSortingPatch.ApplyPatch();
+            QuickStackPatch.ApplyPatch();
         }
         public override void Unload()
         {
@@ -49,7 +50,9 @@ namespace ColorfulGel
             ItemPatch.RemovePatch();
             SlimePatch.RemovePatch();
             ItemSortingPatch.RemovePatch();
+            QuickStackPatch.RemovePatch();
         }
+
         public override void AddRecipes()
         {
             base.AddRecipes();

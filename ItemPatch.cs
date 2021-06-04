@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.UI.Chat;
 
 namespace ColorfulGel
 {
@@ -797,7 +799,26 @@ namespace ColorfulGel
         }
         private static bool Item_IsTheSameAs(On.Terraria.Item.orig_IsTheSameAs orig, Item self, Item compareItem)
         {
-            return orig(self, compareItem) && (self.color == compareItem.color || self.color == default || compareItem.color == default);
+            bool b = orig(self, compareItem) && (self.color == compareItem.color || self.color == default || compareItem.color == default);
+
+#if DEBUG
+
+            if (self.netID == ItemID.Gel && compareItem.netID == ItemID.Gel) 
+            {
+                if (!ColorfulGel.TryGetGelItemColorName(self, out string color1)) color1 = "unknown";
+                if (!ColorfulGel.TryGetGelItemColorName(compareItem, out string color2)) color2 = "unknown";
+
+                Main.NewText(new List<TextSnippet>() 
+                {
+                    new TextSnippet("Comparing gel: "),
+                    new TextSnippet(color1, self.color),
+                    new TextSnippet(" and "),
+                    new TextSnippet(color2, compareItem.color),
+                    new TextSnippet($": {b}"),
+                });
+            }
+#endif
+            return b;
         }
     }
 }
