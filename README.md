@@ -1,2 +1,1 @@
-Colorful Gel mod makes different slime drop different colored gel.
-For now the only differences between those colored gels is their color and count of torches they make.
+Colorful Gel mod makes different slime drop different colored gel, which is typically used in modified potion recipes (and for making torches, of course).
